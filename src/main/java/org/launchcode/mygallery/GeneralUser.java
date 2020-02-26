@@ -2,12 +2,13 @@ package org.launchcode.mygallery;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 
 //Written by Kevin Buss
 
-
+@Entity
 public class GeneralUser extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

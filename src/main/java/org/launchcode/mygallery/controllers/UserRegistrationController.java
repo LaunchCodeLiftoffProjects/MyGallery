@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
 
 //Written by Jen Buck
 @Controller
@@ -21,18 +22,18 @@ public class UserRegistrationController {
     @GetMapping("create") //This should create a new User
     public String displayUserRegistrationForm(Model model) {
         model.addAttribute("title", "User Registration");
-        model.addAttribute(new User()); //Get whatever the name for User class to put here
+        model.addAttribute(new GeneralUser()); //Get whatever the name for User class to put here
         return "userRegistration/create";
     }
 
     @PostMapping("create")//This should add the user to the userRegistrationRepository
-    public String processUserRegistrationForm(@ModelAttribute @Valid User newUser, Errors errors, Model model) {
+    public String processUserRegistrationForm(@ModelAttribute @Valid GeneralUser newGeneralUser, Errors errors, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");
             return "userRegistration/create";
         }
 
-        userRegistrationRepository.save(newUser);
+        userRegistrationRepository.save(newGeneralUser);
         return "redirect";
     }
 }

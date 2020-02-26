@@ -22,7 +22,7 @@ public class UserRegistrationController {
     @GetMapping("create") //This should create a new User
     public String displayUserRegistrationForm(Model model) {
         model.addAttribute("title", "User Registration");
-        model.addAttribute(new GeneralUser()); //Get whatever the name for User class to put here
+        model.addAttribute(new GeneralUser()); 
         return "userRegistration/create";
     }
 

@@ -1,5 +1,6 @@
 package org.launchcode.mygallery.controllers;
 
+import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.UserRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

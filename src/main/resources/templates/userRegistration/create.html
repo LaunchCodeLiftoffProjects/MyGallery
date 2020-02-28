@@ -3,9 +3,35 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>User Registration</title>
 </head>
-<body>
-Hello New User!
+<body class="container">
+Hello Create User Page!
+
+<form method="post">
+    <div class="form-group">
+        <label>User Name
+            <input th:field="${generalUser.username}" class="form-control">
+        </label>
+        <p class="error" th:errors="${generalUser.username}"></p>
+    </div>
+    <div class="form-group">
+        <label>Password
+            <input th:field="${generalUser.pwHash}" class="form-control">
+        </label>
+        <p class="error" th:errors="${generalUser.pwHash}"></p>
+    </div>
+    <div class="form-group">
+        <label>Role
+            <select>
+                <option>Artist</option> <!--add code here to assign role value-->
+                <option>Explorer</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
 </body>
 </html>

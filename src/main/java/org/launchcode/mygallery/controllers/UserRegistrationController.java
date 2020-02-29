@@ -20,14 +20,14 @@ public class UserRegistrationController {
     @Autowired
     private UserRegistrationRepository userRegistrationRepository;
 
-    @GetMapping("create") //This should create a new User
+    @GetMapping() //This should create a new User
     public String displayUserRegistrationForm(Model model) {
         model.addAttribute("title", "User Registration");
-        model.addAttribute(new GeneralUser()); 
+        model.addAttribute(new GeneralUser());
         return "userRegistration/create";
     }
 
-    @PostMapping("create")//This should add the user to the userRegistrationRepository
+    @PostMapping()//This should add the user to the userRegistrationRepository
     public String processUserRegistrationForm(@ModelAttribute @Valid GeneralUser newGeneralUser, Errors errors, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");

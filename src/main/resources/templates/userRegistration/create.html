@@ -6,18 +6,18 @@
     <title>User Registration</title>
 </head>
 <body class="container">
-Hello Create User Page!
+Hello User Registration Page!
 
 <form method="post">
     <div class="form-group">
         <label>User Name
-            <input th:field="${generalUser.username}" class="form-control">
+                <input type="text" th:field="${generalUser.username}" class="form-control">
         </label>
         <p class="error" th:errors="${generalUser.username}"></p>
     </div>
     <div class="form-group">
         <label>Password
-            <input th:field="${generalUser.pwHash}" class="form-control">
+                <input type="text" th:field="${generalUser.pwHash}" class="form-control">
         </label>
         <p class="error" th:errors="${generalUser.pwHash}"></p>
     </div>

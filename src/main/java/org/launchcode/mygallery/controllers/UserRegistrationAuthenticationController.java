@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -53,13 +54,32 @@ public class UserRegistrationAuthenticationController {
     }
 
     @PostMapping()//This should add the user to the userRegistrationRepository
-    public String processUserRegistrationForm(@ModelAttribute @Valid GeneralUser newGeneralUser, Errors errors, Model model) {
+    public String processUserRegistrationForm(@ModelAttribute @Valid UserRegistrationFormDTO userRegistrationFormDTO, Errors errors, HttpServletRequest request, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");
             return "register";
         }
 
+        GeneralUser existingUser = userRegistrationRepository.findByUsername(userRegistrationFormDTO.getUsername());
+
+        if(existingUser != null) {
+            errors.rejectValue("username", "username.alreadyexists", "Someone is already using that name. Please try again. ");
+            model.addAttribute("title", "User Registration");
+            return "register";
+        }
+
+        String password = userRegistrationFormDTO.getPassword();
+        String verifyPassword = userRegistrationFormDTO.getVerifyPassword();
+        if (!password.equals(verifyPassword)) {
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match.");
+            model.addAttribute("title", "User Registration");
+            return "register";
+        }
+
+        GeneralUser newGeneralUser = new GeneralUser(userRegistrationFormDTO.getUsername(),userRegistrationFormDTO.getPassword());
         userRegistrationRepository.save(newGeneralUser);
+        setUserInSession(request.getSession(),newGeneralUser);
+        
         return "redirect";
     }
 }

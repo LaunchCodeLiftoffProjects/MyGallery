@@ -11,7 +11,7 @@ Hello User Registration Page!
 <form method="post">
     <div class="form-group">
         <label>User Name
-                <input type="text" th:field="${generalUser.username}" class="form-control">
+                <input th:field="${generalUser.username}" class="form-control">
         </label>
         <p class="error" th:errors="${generalUser.username}"></p>
     </div>

@@ -2,6 +2,7 @@ package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.UserRegistrationRepository;
+import org.launchcode.mygallery.models.dto.UserRegistrationFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,7 @@ public class UserRegistrationAuthenticationController {
 
     @GetMapping() //This should create a new User
     public String displayUserRegistrationForm(Model model) {
-        model.addAttribute(new RegisterFormDTO());
+        model.addAttribute(new UserRegistrationFormDTO());
         model.addAttribute("title", "User Registration");
         return "register";
     }

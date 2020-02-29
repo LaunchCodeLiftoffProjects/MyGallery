@@ -1,5 +1,6 @@
 package org.launchcode.mygallery.models.dto;
 
+//written by Jen Buck
 public class UserRegistrationFormDTO extends LoginFormDTO{
 
     private String verifyPassword;

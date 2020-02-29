@@ -79,7 +79,7 @@ public class UserRegistrationAuthenticationController {
         GeneralUser newGeneralUser = new GeneralUser(userRegistrationFormDTO.getUsername(),userRegistrationFormDTO.getPassword());
         userRegistrationRepository.save(newGeneralUser);
         setUserInSession(request.getSession(),newGeneralUser);
-        
+
         return "redirect";
     }
 }

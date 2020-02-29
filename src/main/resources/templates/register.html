@@ -10,17 +10,23 @@ Hello User Registration Page!
 
 <form method="post">
     <div class="form-group">
-        <label>User Name
-                <input th:field="${generalUser.username}" class="form-control">
+        <label>Username
+                <input th:field="${userRegistrationFormDTO.username}" class="form-control">
         </label>
-        <p class="error" th:errors="${generalUser.username}"></p>
+        <p class="error" th:errors="${userRegistrationFormDTO.username}"></p>
     </div>
     <div class="form-group">
         <label>Password
-                <input type="text" th:field="${generalUser.pwHash}" class="form-control">
+                <input th:field="${userRegistrationFormDTO.password}" class="form-control">
         </label>
-        <p class="error" th:errors="${generalUser.pwHash}"></p>
+        <p class="error" th:errors="${userRegistrationFormDTO.password}"></p>
     </div>
+    <div class="form-group">
+        <label>Verify Password
+            <input class="form-control" th:field="${userRegistrationFormDTO.verifyPassword}" type="password" />
+        </label>
+    </div>
+
     <div class="form-group">
         <label>Role
             <select>
@@ -30,7 +36,7 @@ Hello User Registration Page!
         </label>
     </div>
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-success">
+        <input type="submit" value="Register" class="btn btn-primary">
     </div>
 </form>
 </body>

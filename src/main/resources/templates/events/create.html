@@ -1,0 +1,42 @@
+<!--written by Kevin Buss-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Event</title>
+</head>
+<body>
+<p>Work Dammit</p>
+<form method="post">
+    <div class="form-group">
+        <label>Event Name
+            <input th:field="${event.titleSummary}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Location
+            <input th:field="${event.location}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+    <div class="form-group">
+        <label>Start Date
+            <input th:field="${event.startDate}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>End Date
+            <input th:field="${event.endDate}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
+</body>
+</html>

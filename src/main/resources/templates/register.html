@@ -1,0 +1,43 @@
+<!--written by Jen Buck-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>User Registration</title>
+</head>
+<body class="container">
+Hello User Registration Page!
+
+<form method="post">
+    <div class="form-group">
+        <label>Username
+                <input th:field="${userRegistrationFormDTO.username}" class="form-control">
+        </label>
+        <p class="error" th:errors="${userRegistrationFormDTO.username}"></p>
+    </div>
+    <div class="form-group">
+        <label>Password
+                <input th:field="${userRegistrationFormDTO.password}" class="form-control">
+        </label>
+        <p class="error" th:errors="${userRegistrationFormDTO.password}"></p>
+    </div>
+    <div class="form-group">
+        <label>Verify Password
+            <input class="form-control" th:field="${userRegistrationFormDTO.verifyPassword}" type="password" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>Role
+            <select>
+                <option>Artist</option> <!--add code here to assign role value-->
+                <option>Explorer</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Register" class="btn btn-primary">
+    </div>
+</form>
+</body>
+</html>

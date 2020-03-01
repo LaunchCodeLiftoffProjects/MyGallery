@@ -18,6 +18,8 @@ public class LoginFormDTO {
     @Size(min = 8, max = 30, message = "Please enter a password between 8 and 30 characters")
     private String password;
 
+    private String role;
+
     public String getUsername() {
         return username;
     }
@@ -32,5 +34,13 @@ public class LoginFormDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

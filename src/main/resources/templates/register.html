@@ -29,9 +29,9 @@ Hello User Registration Page!
 
     <div class="form-group">
         <label>Role
-            <select>
-                <option>Artist</option> <!--add code here to assign role value-->
-                <option>Explorer</option>
+            <select th:field="${userRegistrationFormDTO.role}">
+                <option th:value="artist" th:text="Artist"></option>
+                <option th:value="explorer" th:text="Explorer"></option>
             </select>
         </label>
     </div>

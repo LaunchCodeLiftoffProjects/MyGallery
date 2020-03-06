@@ -1,0 +1,22 @@
+<!--written by Kevin Buss-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Events</title>
+</head>
+<body class="container">
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Event Name</th>
+    </tr>
+    </thead>
+    <tr th:each="event : ${events}">
+        <td><a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.titleSummary}"></a></td>
+    </tr>
+</table>
+
+</body>
+</html>

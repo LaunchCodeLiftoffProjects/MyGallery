@@ -3,11 +3,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Add Event</title>
+    <title>Event</title>
 </head>
 <body class="container">
-
-<header th:replace="fragments :: header"></header>
 
 <table class="table table-striped">
     <tr>
@@ -16,7 +14,7 @@
     </tr>
     <tr>
         <th>Name</th>
-        <td th:text="${event.name}"></td>
+        <td th:text="${event.titleSummary}"></td>
     </tr>
     <tr>
         <th>Description</th>
@@ -35,8 +33,6 @@
         <td th:text="${event.endDate}"></td>
     </tr>
 </table>
-
-<a th:href="'/events/add-tag?eventId=' + ${event.id}">Add Tag</a>
 
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!--written by Kevin Buss-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>My Gallery</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/styles.css}">
+
+</head>
+<body>
+
+<header th:fragment="header">
+    <h1>My Gallery</h1>
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="/">Artwork</a></li>
+        <li class="nav-item"><a class="nav-link" href="/artist/index">Artists</a></li>
+        <li class="nav-item"><a class="nav-link" href="/events/index">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">Shopping</a></li>
+    </ul>
+    <h3 th:text="${title}"></h3>
+</header>
+
+</body>
+</html>

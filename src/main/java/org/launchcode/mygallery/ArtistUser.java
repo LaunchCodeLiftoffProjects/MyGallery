@@ -5,8 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-//written by Elizabeth Ernst
-
 @Entity
 public class ArtistUser extends AbstractEntity {
 

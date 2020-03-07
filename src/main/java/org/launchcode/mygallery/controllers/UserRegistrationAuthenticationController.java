@@ -76,7 +76,7 @@ public class UserRegistrationAuthenticationController {
             return "register";
         }
 
-        GeneralUser newGeneralUser = new GeneralUser(userRegistrationFormDTO.getUsername(),userRegistrationFormDTO.getPassword());
+        GeneralUser newGeneralUser = new GeneralUser(userRegistrationFormDTO.getUsername(),userRegistrationFormDTO.getPassword(), userRegistrationFormDTO.getRole());
         userRegistrationRepository.save(newGeneralUser);
         setUserInSession(request.getSession(),newGeneralUser);
 

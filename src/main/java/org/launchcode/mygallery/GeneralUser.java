@@ -30,10 +30,6 @@ public class GeneralUser extends AbstractEntity {
         this.role = role;
     }
 
-    public GeneralUser(String username, String password) {  //I created this so I could test the code without having the role assigned - JB
-        super();
-    }
-
     public String getUsername() {
         return username;
     }

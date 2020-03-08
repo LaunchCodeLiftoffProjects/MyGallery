@@ -8,12 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping
+@RequestMapping("artist")
 public class ArtistController {
 
     @Autowired
@@ -26,8 +27,8 @@ public class ArtistController {
         return "artist/create";
     }
 
-
-    public String processCreateArtistForm(@ModelAttribute @Valid Artist newArtist,
+    @PostMapping("create")
+     public String processCreateArtistForm(@ModelAttribute @Valid Artist newArtist,
                                           Errors errors, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title","Create Artist");

@@ -1,16 +1,18 @@
 package org.launchcode.mygallery;
 
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Artist extends AbstractEntity {
 
     private String artistName;
     private String artistInfo;
-    private List<String> socialLinks = new ArrayList<>();
+    private String socialLinks;
 
-    public Artist(String artistName, String artistInfo, List<String> socialLinks) {
+    public Artist(String artistName, String artistInfo, String socialLinks) {
         this.artistName = artistName;
         this.artistInfo = artistInfo;
         this.socialLinks = socialLinks;
@@ -34,11 +36,11 @@ public class Artist extends AbstractEntity {
         this.artistInfo = artistInfo;
     }
 
-    public List<String> getSocialLinks() {
+    public String getSocialLinks() {
         return socialLinks;
     }
 
-    public void setSocialLinks(List<String> socialLinks) {
+    public void setSocialLinks(String socialLinks) {
         this.socialLinks = socialLinks;
     }
 }

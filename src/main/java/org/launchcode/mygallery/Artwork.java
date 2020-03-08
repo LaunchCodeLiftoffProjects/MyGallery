@@ -5,21 +5,22 @@ import com.mysql.cj.jdbc.Blob;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+//Coded by Kevin Buss
+
 @Entity
 public class Artwork extends AbstractEntity {
 
 // To be added with a One to Many relationship with the Artist table later
 //    @ManyToOne
 //    private Artist artist;
-    private Blob artworkImage;
+//    private Blob artworkImage;
     private String title;
     private String description;
     private String medium;
     private String genre;
     private String size;
 
-    public Artwork(Blob artworkImage, String title, String description, String medium, String genre, String size) {
-        this.artworkImage = artworkImage;
+    public Artwork(String title, String description, String medium, String genre, String size) {
         this.title = title;
         this.description = description;
         this.medium = medium;
@@ -28,14 +29,6 @@ public class Artwork extends AbstractEntity {
     }
 
     public Artwork() {}
-
-    public Blob getArtworkImage() {
-        return artworkImage;
-    }
-
-    public void setArtworkImage(Blob artworkImage) {
-        this.artworkImage = artworkImage;
-    }
 
     public String getTitle() {
         return title;

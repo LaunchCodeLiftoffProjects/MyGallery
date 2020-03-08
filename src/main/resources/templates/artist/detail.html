@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Event</title>
+</head>
+<body class="container">
+​
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <td th:text="${artist.id}"></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td th:text="${artist.titleSummary}"></td>
+    </tr>
+    <tr>
+        <th>Biography</th>
+        <td th:text="${artist.biography}"></td>
+    </tr>
+    <tr>
+        <th>Events</th>
+        <td th:text="${artist.events}"></td>
+    </tr>
+    <tr>
+
+</table>
+​
+</body>
+</html>

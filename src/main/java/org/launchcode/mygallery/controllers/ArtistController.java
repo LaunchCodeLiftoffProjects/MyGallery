@@ -1,24 +1,23 @@
 package org.launchcode.mygallery.controllers;
 
-import org.launchcode.mygallery.data.ArtistPageRepository;
-import org.launchcode.mygallery.models.dto.Artist;
+import org.launchcode.mygallery.Artist;
+import org.launchcode.mygallery.data.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping
-public class ArtistPageController {
+public class ArtistController {
 
     @Autowired
-    private ArtistPageRepository artistPageRepository;
+    private ArtistRepository artistRepository;
 
     @GetMapping("create")
     public String displayCreateArtistForm (Model model){
@@ -34,9 +33,7 @@ public class ArtistPageController {
             model.addAttribute("title","Create Artist");
             return "artist/create;";
         }
-      artistPageRepository.save(newArtist);
+        artistRepository.save(newArtist);
         return "redirect:";
     }
 }
-
-

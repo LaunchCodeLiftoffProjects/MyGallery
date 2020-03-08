@@ -20,7 +20,7 @@ import java.util.Optional;
 
 //Written by Jen Buck
 @Controller
-@RequestMapping("register")
+@RequestMapping()
 public class UserRegistrationAuthenticationController {
 
     @Autowired
@@ -47,14 +47,14 @@ public class UserRegistrationAuthenticationController {
         session.setAttribute(userSessionKey, generalUser.getId());
     }
 
-    @GetMapping() //This should create a new User
+    @GetMapping("/register") //This should create a new User
     public String displayUserRegistrationForm(Model model) {
         model.addAttribute(new UserRegistrationFormDTO());
         model.addAttribute("title", "User Registration");
         return "register";
     }
 
-    @PostMapping()//This should add the user to the userRegistrationRepository
+    @PostMapping("/register")//This should add the user to the userRegistrationRepository
     public String processUserRegistrationForm(@ModelAttribute @Valid UserRegistrationFormDTO userRegistrationFormDTO, Errors errors, HttpServletRequest request, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");
@@ -120,7 +120,7 @@ public class UserRegistrationAuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:";
+        return "redirect:/login";
     }
 
     @GetMapping("/logout")

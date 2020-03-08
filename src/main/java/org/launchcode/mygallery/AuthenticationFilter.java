@@ -23,8 +23,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     @Autowired
     UserRegistrationAuthenticationController authenticationController;
 
-//    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
-    private static final List<String> whitelist = Arrays.asList("/register");
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
 
     private static boolean isWhitelisted(String path) {
         for (String pathRoot : whitelist) {
@@ -55,7 +54,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         }
 
         // The user is NOT logged in
-        response.sendRedirect("/register/login");
+        response.sendRedirect("/login");
         return false;
     }
 

@@ -9,20 +9,20 @@
 <form method="post">
     <div class="form-group">
         <label>Artist Name
-            <input th:field="${artist.titleSummary}" class="form-control">
+            <input th:field="${artist.artistName}" class="form-control">
         </label>
     </div>
     <div class="form-group">
         <label>Biography
-            <input th:field="${artist.biography}" class="form-control">
+            <input th:field="${artist.artistInfo}" class="form-control">
         </label>
     </div>
 
     <div class="form-group">
-        <label>Events
-            <input th:field="${artist.event}" class="form-control">
+        <label>SocialLinks
+            <input th:field="${artist.socialLinks}" class="form-control">
         </label>
-        <p class="error" th:errors="${artist.event}"></p>
+        <p class="error" th:errors="${artist.socialLinks}"></p>
     </div>
         <div class="form-group">
         <input type="submit" value="Create" class="btn btn-success">

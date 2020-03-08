@@ -27,6 +27,8 @@ public class Artwork extends AbstractEntity {
         this.size = size;
     }
 
+    public Artwork() {}
+
     public Blob getArtworkImage() {
         return artworkImage;
     }

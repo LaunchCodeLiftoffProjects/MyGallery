@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class ArtistUser extends AbstractEntity {
 
+    //TO BE DELETED
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @NotNull

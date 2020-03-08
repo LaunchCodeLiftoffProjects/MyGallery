@@ -2,6 +2,7 @@ package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.UserRegistrationRepository;
+import org.launchcode.mygallery.models.dto.LoginFormDTO;
 import org.launchcode.mygallery.models.dto.UserRegistrationFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 //Written by Jen Buck
 @Controller
-@RequestMapping("register")
+@RequestMapping()
 public class UserRegistrationAuthenticationController {
 
     @Autowired
@@ -46,14 +47,14 @@ public class UserRegistrationAuthenticationController {
         session.setAttribute(userSessionKey, generalUser.getId());
     }
 
-    @GetMapping() //This should create a new User
+    @GetMapping("/register") //This should create a new User
     public String displayUserRegistrationForm(Model model) {
         model.addAttribute(new UserRegistrationFormDTO());
         model.addAttribute("title", "User Registration");
         return "register";
     }
 
-    @PostMapping()//This should add the user to the userRegistrationRepository
+    @PostMapping("/register")//This should add the user to the userRegistrationRepository
     public String processUserRegistrationForm(@ModelAttribute @Valid UserRegistrationFormDTO userRegistrationFormDTO, Errors errors, HttpServletRequest request, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");
@@ -81,5 +82,50 @@ public class UserRegistrationAuthenticationController {
         setUserInSession(request.getSession(),newGeneralUser);
 
         return "redirect";
+    }
+
+    //This section written by Austin Yates
+    @GetMapping("/login")
+    public String displayLoginForm(Model model) {
+        model.addAttribute(new LoginFormDTO());
+        model.addAttribute("title", "Log In");
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                   Errors errors, HttpServletRequest request,
+                                   Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        GeneralUser theUser = userRegistrationRepository.findByUsername(loginFormDTO.getUsername());
+
+        if (theUser == null) {
+            errors.rejectValue("username", "user.invalid", "The given username does not exist");
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        String password = loginFormDTO.getPassword();
+
+        if (!theUser.isMatchingPassword(password)) {
+            errors.rejectValue("password", "password.invalid", "Invalid password");
+            model.addAttribute("title", "Log In");
+            return "login";
+        }
+
+        setUserInSession(request.getSession(), theUser);
+
+        return "redirect:/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/login";
     }
 }

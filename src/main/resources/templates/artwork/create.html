@@ -1,0 +1,40 @@
+<!--written by Kevin Buss-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <div class="form-group">
+        <label>Title
+            <input th:field="${artwork.title}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${artwork.description}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Medium
+            <input th:field="${artwork.medium}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Genre
+            <input th:field="${artwork.genre}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Size
+            <input th:field="${artwork.size}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
+</body>
+</html>

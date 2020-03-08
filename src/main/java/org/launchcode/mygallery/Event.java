@@ -11,7 +11,6 @@ public class Event extends AbstractEntity {
 
     @NotBlank
     private String titleSummary;
-
     private String description;
     private String location;
 

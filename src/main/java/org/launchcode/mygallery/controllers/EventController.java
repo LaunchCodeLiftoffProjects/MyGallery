@@ -34,7 +34,7 @@ public class EventController {
         }
 
         eventRepository.save(newEvent);
-        return "redirect:";
+        return "redirect:index";
     }
 
     @GetMapping("index")

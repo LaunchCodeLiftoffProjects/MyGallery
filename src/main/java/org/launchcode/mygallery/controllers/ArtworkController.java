@@ -2,11 +2,14 @@ package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.data.ArtworkRepository;
+import org.launchcode.mygallery.data.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -16,6 +19,9 @@ import java.util.Optional;
 public class ArtworkController {
 
 
+
+
+        private StorageService storageService;
 
         @Autowired
         private ArtworkRepository artworkRepository;
@@ -27,7 +33,7 @@ public class ArtworkController {
             return "artwork/create";
         }
 
-        @PostMapping("create")
+ /*       @PostMapping("create")
         public String processCreateArtworkForm(@ModelAttribute @Valid Artwork newArtwork,
                                              Errors errors, Model model) {
             if(errors.hasErrors()) {
@@ -36,6 +42,24 @@ public class ArtworkController {
             }
 
             artworkRepository.save(newArtwork);
+            return "redirect:";
+        }
+ */
+
+        @PostMapping("create")
+        public String handleArtworkUpload(@RequestParam("file") MultipartFile file,
+                                       RedirectAttributes redirectAttributes, Artwork newArtwork, Model model, Errors errors) {
+
+            if(errors.hasErrors()) {
+                model.addAttribute("title", "Add Artwork");
+                return "artwork/create";
+            }
+            artworkRepository.save(newArtwork);
+            storageService.store(file);
+            redirectAttributes.addFlashAttribute("message",
+                    "You successfully uploaded " + file.getOriginalFilename() + "!");
+
+
             return "redirect:";
         }
 

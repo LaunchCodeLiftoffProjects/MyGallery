@@ -2,7 +2,7 @@ package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.data.ArtworkRepository;
-import org.launchcode.mygallery.data.StorageService;
+import org.launchcode.mygallery.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

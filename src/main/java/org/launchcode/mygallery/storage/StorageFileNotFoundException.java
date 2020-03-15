@@ -1,4 +1,6 @@
-package org.launchcode.mygallery;
+package org.launchcode.mygallery.storage;
+
+import org.launchcode.mygallery.storage.StorageException;
 
 public class StorageFileNotFoundException extends StorageException {
 

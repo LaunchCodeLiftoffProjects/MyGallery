@@ -1,6 +1,6 @@
 package org.launchcode.mygallery;
 
-import org.launchcode.mygallery.data.StorageService;
+import org.launchcode.mygallery.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package org.launchcode.mygallery;
+package org.launchcode.mygallery.storage;
 
 
 public class StorageException extends RuntimeException {

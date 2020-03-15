@@ -1,4 +1,4 @@
-package org.launchcode.mygallery;
+package org.launchcode.mygallery.storage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +9,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
-import org.launchcode.mygallery.StorageProperties;
-import org.launchcode.mygallery.data.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

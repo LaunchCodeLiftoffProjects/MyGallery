@@ -120,7 +120,7 @@ public class UserRegistrationAuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:/login";
+        return "redirect:/landing";
     }
 
     @GetMapping("/logout")

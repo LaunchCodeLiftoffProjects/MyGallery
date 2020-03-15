@@ -36,7 +36,7 @@ public class ArtworkController {
             }
 
             artworkRepository.save(newArtwork);
-            return "redirect:";
+            return "redirect:index";
         }
 
         @GetMapping("index")
@@ -52,9 +52,9 @@ public class ArtworkController {
 
             Optional<Artwork> result = artworkRepository.findById(artworkId);
 
-            Artwork artwork = result.get();
-            model.addAttribute("title", artwork.getTitle() + " Details");
-            model.addAttribute("artwork", artwork);
-            return "artwork/detail";
+                Artwork artwork = result.get();
+                model.addAttribute("title", artwork.getTitle() + " Details");
+                model.addAttribute("artwork", artwork);
+                return "artwork/detail";
         }
     }

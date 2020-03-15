@@ -4,41 +4,35 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <header th:replace="fragments :: header"></header>
-<div>
-    <form method="Post" enctype="multipart/form-data" action="/" >
-        <div class="form-group">
-            <label>Title
-                <input th:field="${artwork.title}" class="form-control">
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Description
-                <input th:field="${artwork.description}" class="form-control">
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Medium
-                <input th:field="${artwork.medium}" class="form-control">
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Genre
-                <input th:field="${artwork.genre}" class="form-control">
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Size
-                <input th:field="${artwork.size}" class="form-control">
-            </label>
-        </div>
-        <div th:if="${message}">
-            <h2 th:text="${message}"/>
-        </div>
-        <table>
-            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-            <tr><td></td><td><input type="submit" value="Create" class="btn btn-success"/></td></tr>
-        </table>
-    </form>
-</div>
+<form method="post">
+    <div class="form-group">
+        <label>Title
+            <input th:field="${artwork.title}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${artwork.description}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Medium
+            <input th:field="${artwork.medium}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Genre
+            <input th:field="${artwork.genre}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Size
+            <input th:field="${artwork.size}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
 </body>
 </html>

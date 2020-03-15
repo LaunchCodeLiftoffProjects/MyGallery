@@ -33,7 +33,7 @@ public class ArtworkController {
             return "artwork/create";
         }
 
- /*       @PostMapping("create")
+       @PostMapping("create")
         public String processCreateArtworkForm(@ModelAttribute @Valid Artwork newArtwork,
                                              Errors errors, Model model) {
             if(errors.hasErrors()) {
@@ -42,32 +42,39 @@ public class ArtworkController {
             }
 
             artworkRepository.save(newArtwork);
-            return "redirect:";
+            return "redirect:upload";
         }
- */
 
-        @PostMapping("create")
+
+        @PostMapping("upload")
         public String handleArtworkUpload(@RequestParam("file") MultipartFile file,
-                                       RedirectAttributes redirectAttributes, Artwork newArtwork, Model model, Errors errors) {
+                                       RedirectAttributes redirectAttributes, @ModelAttribute @Valid Artwork newArtwork, Model model, Errors errors) {
 
             if(errors.hasErrors()) {
                 model.addAttribute("title", "Add Artwork");
-                return "artwork/create";
+                return "artwork/upload";
             }
-            artworkRepository.save(newArtwork);
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded " + file.getOriginalFilename() + "!");
 
 
-            return "redirect:";
+            return "redirect:index";
         }
+
+        @GetMapping("upload")
+        public String displayUploadArtworkForm(Model model) {
+            model.addAttribute("title", "Add Artwork Image");
+            model.addAttribute(new Artwork());
+            return "artwork/upload";
+        }
+
 
         @GetMapping("index")
         public String displayAllArtwork(Model model) {
 
             model.addAttribute("title", "Artwork");
-            model.addAttribute("artwork", artworkRepository.findAll());
+            model.addAttribute("artworks", artworkRepository.findAll());
             return "artwork/index";
         }
 

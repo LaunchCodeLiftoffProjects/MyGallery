@@ -6,28 +6,26 @@
 
 <header th:replace="fragments :: header"></header>
 
-<body class="container">
-
 <table class="table table-striped">
     <tr>
         <th>Title</th>
-        <td th:text="${artist.title}"></td>
+        <td th:text="${artwork.title}"></td>
     </tr>
     <tr>
         <th>Description</th>
-        <td th:text="${artist.description}"></td>
+        <td th:text="${artwork.description}"></td>
     </tr>
     <tr>
         <th>Medium</th>
-        <td th:text="${artist.medium}"></td>
+        <td th:text="${artwork.medium}"></td>
     </tr>
     <tr>
         <th>Genre</th>
-        <td th:text="${artist.genre}"></td>
+        <td th:text="${artwork.genre}"></td>
     </tr>
     <tr>
         <th>Size</th>
-        <td th:text="${artist.size}"></td>
+        <td th:text="${artwork.size}"></td>
     </tr>
 </table>
 

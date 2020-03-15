@@ -49,12 +49,7 @@ public class ArtworkController {
 
         @PostMapping("upload")
         public String handleArtworkUpload(@RequestParam("file") MultipartFile file, Integer artworkId,
-                                       RedirectAttributes redirectAttributes, @ModelAttribute @Valid Artwork newArtwork, Model model, Errors errors) {
-
-            if(errors.hasErrors()) {
-                model.addAttribute("title", "Add Artwork");
-                return "artwork/upload";
-            }
+                                       RedirectAttributes redirectAttributes) {
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded " + file.getOriginalFilename() + "!");

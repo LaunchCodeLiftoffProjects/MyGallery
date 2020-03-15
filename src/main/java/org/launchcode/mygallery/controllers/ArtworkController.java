@@ -57,4 +57,5 @@ public class ArtworkController {
                 model.addAttribute("artwork", artwork);
                 return "artwork/detail";
         }
+
     }

@@ -68,6 +68,7 @@ public class ArtworkController {
         @GetMapping("upload")
         public String displayUploadArtworkForm(Model model) {
             model.addAttribute("title", "Add Artwork Image");
+
             return "artwork/upload";
         }
 

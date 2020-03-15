@@ -35,19 +35,20 @@ public class ArtworkController {
 
        @PostMapping("create")
         public String processCreateArtworkForm(@ModelAttribute @Valid Artwork newArtwork,
-                                             Errors errors, Model model) {
+                                             Errors errors, Model model, RedirectAttributes redirectAttributes) {
             if(errors.hasErrors()) {
                 model.addAttribute("title", "Add Artwork");
                 return "artwork/create";
             }
 
             artworkRepository.save(newArtwork);
+           redirectAttributes.addAttribute("artWorkId", newArtwork.getId());
             return "redirect:upload";
         }
 
 
         @PostMapping("upload")
-        public String handleArtworkUpload(@RequestParam("file") MultipartFile file,
+        public String handleArtworkUpload(@RequestParam("file") MultipartFile file, Integer artworkId,
                                        RedirectAttributes redirectAttributes, @ModelAttribute @Valid Artwork newArtwork, Model model, Errors errors) {
 
             if(errors.hasErrors()) {
@@ -57,7 +58,9 @@ public class ArtworkController {
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded " + file.getOriginalFilename() + "!");
-
+            Optional<Artwork> result = artworkRepository.findById(artworkId);
+            Artwork artwork = result.get();
+            artwork.setArtLink(file.getOriginalFilename());
 
             return "redirect:index";
         }
@@ -65,7 +68,6 @@ public class ArtworkController {
         @GetMapping("upload")
         public String displayUploadArtworkForm(Model model) {
             model.addAttribute("title", "Add Artwork Image");
-            model.addAttribute(new Artwork());
             return "artwork/upload";
         }
 

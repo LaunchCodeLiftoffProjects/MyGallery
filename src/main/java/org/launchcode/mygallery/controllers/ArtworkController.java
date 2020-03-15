@@ -43,7 +43,7 @@ public class ArtworkController {
         public String displayAllArtwork(Model model) {
 
             model.addAttribute("title", "Artwork");
-            model.addAttribute("artwork", artworkRepository.findAll());
+            model.addAttribute("artworks", artworkRepository.findAll());
             return "artwork/index";
         }
 

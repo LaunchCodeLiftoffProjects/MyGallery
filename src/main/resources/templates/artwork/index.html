@@ -6,12 +6,11 @@
 
 <header th:replace="fragments :: header"></header>
 
-<body class="container">
-
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Artwork</th>
+        <a th:href="@{search}">Search for Art</a><!--This line added by Jen Buck-->
     </tr>
     </thead>
     <tr th:each="artwork : ${artworks}">

@@ -18,10 +18,12 @@ import java.util.Optional;
 @RequestMapping("artwork")
 public class ArtworkController {
 
+        private final StorageService storageService;
 
-
-
-        private StorageService storageService;
+        @Autowired
+        public ArtworkController(StorageService storageService) {
+        this.storageService = storageService;
+    }
 
         @Autowired
         private ArtworkRepository artworkRepository;
@@ -42,21 +44,19 @@ public class ArtworkController {
             }
 
             artworkRepository.save(newArtwork);
-           redirectAttributes.addAttribute("artWorkId", newArtwork.getId());
+           redirectAttributes.addAttribute("artworkId",(newArtwork.getId()));
             return "redirect:upload";
         }
 
-
         @PostMapping("upload")
-        public String handleArtworkUpload(@RequestParam("file") MultipartFile file, Integer artworkId,
-                                       RedirectAttributes redirectAttributes) {
+        public String handleArtworkUpload(@RequestParam("file") MultipartFile file,@RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
+
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded " + file.getOriginalFilename() + "!");
             Optional<Artwork> result = artworkRepository.findById(artworkId);
             Artwork artwork = result.get();
             artwork.setArtLink(file.getOriginalFilename());
-
             return "redirect:index";
         }
 
@@ -66,7 +66,6 @@ public class ArtworkController {
 
             return "artwork/upload";
         }
-
 
         @GetMapping("index")
         public String displayAllArtwork(Model model) {

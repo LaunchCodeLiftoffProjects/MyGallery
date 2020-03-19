@@ -43,7 +43,7 @@ public class ArtworkController {
                 return "artwork/create";
             }
 
-            artworkRepository.save(newArtwork);
+           artworkRepository.save(newArtwork);
            redirectAttributes.addAttribute("artworkId",(newArtwork.getId()));
             return "redirect:upload";
         }
@@ -62,6 +62,7 @@ public class ArtworkController {
 
         @GetMapping("upload")
         public String displayUploadArtworkForm(Model model, @RequestParam Integer artworkId) {
+          
             model.addAttribute("title", "Add Artwork Image");
             model.addAttribute("artworkId", artworkId);
             return "artwork/upload";
@@ -80,9 +81,9 @@ public class ArtworkController {
 
             Optional<Artwork> result = artworkRepository.findById(artworkId);
 
-            Artwork artwork = result.get();
-            model.addAttribute("title", artwork.getTitle() + " Details");
-            model.addAttribute("artwork", artwork);
-            return "artwork/detail";
+                Artwork artwork = result.get();
+                model.addAttribute("title", artwork.getTitle() + " Details");
+                model.addAttribute("artwork", artwork);
+                return "artwork/detail";
         }
     }

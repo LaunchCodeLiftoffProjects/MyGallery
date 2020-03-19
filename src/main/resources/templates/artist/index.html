@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tr th:each="artist : ${artists}">
-        <td><a th:href="'/artists/detail?artistId=' + ${artist.id}" th:text="${artist.artistName}"></a></td>
+        <td><a th:href="'/artist/detail?artistId=' + ${artist.id}" th:text="${artist.artistName}"></a></td>
     </tr>
 </table>
 ​

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/artwork/upload">
+        <table>
+            <tr><td>Artwork to upload:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+        <input type="hidden" id="artworkId" name="artworkId" th:value="${artworkId}" >
+    </form>
+</div>
+
+</body>
+</html>

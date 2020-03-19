@@ -12,20 +12,21 @@ public class Artwork extends AbstractEntity {
 
 // To be added with a One to Many relationship with the Artist table later
 //    @ManyToOne
-//    private Artist artist;
-//    private Blob artworkImage;
+//    private Artist artist
     private String title;
     private String description;
     private String medium;
     private String genre;
     private String size;
+    private String artLink;
 
-    public Artwork(String title, String description, String medium, String genre, String size) {
+    public Artwork(String title, String description, String medium, String genre, String size, String artLink) {
         this.title = title;
         this.description = description;
         this.medium = medium;
         this.genre = genre;
         this.size = size;
+        this.artLink = artLink;
     }
 
     public Artwork() {}
@@ -68,5 +69,13 @@ public class Artwork extends AbstractEntity {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getArtLink() {
+        return artLink;
+    }
+
+    public void setArtLink(String artLink) {
+        this.artLink = artLink;
     }
 }

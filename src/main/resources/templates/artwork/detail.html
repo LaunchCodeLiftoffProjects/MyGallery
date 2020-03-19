@@ -6,9 +6,11 @@
 
 <header th:replace="fragments :: header"></header>
 
-<body class="container">
-
 <table class="table table-striped">
+    <tr>
+        <th>Artwork</th>
+        <td th:text="${artwork.artLink}"></td>
+    </tr>
     <tr>
         <th>Title</th>
         <td th:text="${artwork.title}"></td>

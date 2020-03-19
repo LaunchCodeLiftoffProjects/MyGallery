@@ -37,4 +37,12 @@ public class ArtistController {
         artistRepository.save(newArtist);
         return "redirect:";
     }
+
+    @GetMapping("index")
+    public String displayAllArtists(Model model) {
+
+        model.addAttribute("title", "Artists");
+        model.addAttribute("artists", artistRepository.findAll());
+        return "artist/index";
+    }
 }

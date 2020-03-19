@@ -49,7 +49,7 @@ public class ArtworkController {
         }
 
         @PostMapping("upload")
-        public String handleArtworkUpload(@RequestParam("file") MultipartFile file,@RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
+        public String handleArtworkUpload(@RequestParam("file") MultipartFile file, @RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
 
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
@@ -61,9 +61,9 @@ public class ArtworkController {
         }
 
         @GetMapping("upload")
-        public String displayUploadArtworkForm(Model model) {
+        public String displayUploadArtworkForm(Model model, @RequestParam Integer artworkId) {
             model.addAttribute("title", "Add Artwork Image");
-
+            model.addAttribute("artworkId", artworkId);
             return "artwork/upload";
         }
 

@@ -6,7 +6,7 @@
 <header th:replace="fragments :: header"></header>
 
 <body>
-    <p>Welcome, User</p>
+<p>Welcome, <span th:text="${user.username}"></span>!  Your role: <span th:text="${user.role}"></span></p>
 
 
     <h4>Insert Art Scroll Here</h4>

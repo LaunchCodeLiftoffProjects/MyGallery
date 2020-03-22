@@ -1,6 +1,7 @@
 package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artwork;
+import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.ArtworkRepository;
 import org.launchcode.mygallery.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -28,8 +30,14 @@ public class ArtworkController {
         @Autowired
         private ArtworkRepository artworkRepository;
 
+        @Autowired
+        UserRegistrationAuthenticationController authenticationController;
+
         @GetMapping("create")
-        public String displayCreateArtworkForm(Model model) {
+        public String displayCreateArtworkForm(Model model, HttpServletRequest request) {
+            GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+            model.addAttribute("user", generalUser);
+
             model.addAttribute("title", "Add Artwork");
             model.addAttribute(new Artwork());
             return "artwork/create";
@@ -37,7 +45,10 @@ public class ArtworkController {
 
        @PostMapping("create")
         public String processCreateArtworkForm(@ModelAttribute @Valid Artwork newArtwork,
-                                             Errors errors, Model model, RedirectAttributes redirectAttributes) {
+                                             Errors errors, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+           GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+           model.addAttribute("user", generalUser);
+
             if(errors.hasErrors()) {
                 model.addAttribute("title", "Add Artwork");
                 return "artwork/create";
@@ -49,7 +60,9 @@ public class ArtworkController {
         }
 
         @PostMapping("upload")
-        public String handleArtworkUpload(@RequestParam("file") MultipartFile file, @RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
+        public String handleArtworkUpload(@RequestParam("file") MultipartFile file, @RequestParam Integer artworkId, RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {
+            GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+            model.addAttribute("user", generalUser);
 
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",
@@ -61,15 +74,19 @@ public class ArtworkController {
         }
 
         @GetMapping("upload")
-        public String displayUploadArtworkForm(Model model, @RequestParam Integer artworkId) {
-          
+        public String displayUploadArtworkForm(Model model, @RequestParam Integer artworkId, HttpServletRequest request) {
+            GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+            model.addAttribute("user", generalUser);
+
             model.addAttribute("title", "Add Artwork Image");
             model.addAttribute("artworkId", artworkId);
             return "artwork/upload";
         }
 
         @GetMapping("index")
-        public String displayAllArtwork(Model model) {
+        public String displayAllArtwork(Model model, HttpServletRequest request) {
+            GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+            model.addAttribute("user", generalUser);
 
             model.addAttribute("title", "Artwork");
             model.addAttribute("artworks", artworkRepository.findAll());
@@ -77,7 +94,9 @@ public class ArtworkController {
         }
 
         @GetMapping("detail")
-        public String displayArtworkDetails(@RequestParam Integer artworkId, Model model) {
+        public String displayArtworkDetails(@RequestParam Integer artworkId, Model model, HttpServletRequest request) {
+            GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+            model.addAttribute("user", generalUser);
 
             Optional<Artwork> result = artworkRepository.findById(artworkId);
 

@@ -1,6 +1,7 @@
 package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Event;
+import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -18,8 +20,14 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    UserRegistrationAuthenticationController authenticationController;
+
     @GetMapping("create")
-    public String displayCreateEventForm(Model model) {
+    public String displayCreateEventForm(Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
         return "events/create";
@@ -27,7 +35,10 @@ public class EventController {
 
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
-                                         Errors errors, Model model) {
+                                         Errors errors, Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
             return "events/create";
@@ -38,7 +49,9 @@ public class EventController {
     }
 
     @GetMapping("index")
-    public String displayEvents(Model model) {
+    public String displayEvents(Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
 
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
@@ -46,7 +59,9 @@ public class EventController {
     }
 
     @GetMapping("detail")
-    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
+    public String displayEventDetails(@RequestParam Integer eventId, Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
 
         Optional<Event> result = eventRepository.findById(eventId);
 

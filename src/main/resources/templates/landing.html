@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/>/www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<header th:replace="fragments :: header"></header>
+
+<body>
+<p>Welcome, <span th:text="${user.username}"></span>!  Your role: <span th:text="${user.role}"></span></p>
+
+
+    <h4>Insert Art Scroll Here</h4>
+</body>
+</html>

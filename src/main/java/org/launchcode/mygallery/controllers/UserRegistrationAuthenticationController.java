@@ -26,6 +26,9 @@ public class UserRegistrationAuthenticationController {
     @Autowired
     private UserRegistrationRepository userRegistrationRepository;
 
+    @Autowired
+    UserRegistrationAuthenticationController authenticationController;
+
     private static final String userSessionKey = "user"; //If this doesn't work, try "generalUser"
 
     public GeneralUser getUserFromSession(HttpSession session) {
@@ -48,7 +51,10 @@ public class UserRegistrationAuthenticationController {
     }
 
     @GetMapping("/register") //This should create a new User
-    public String displayUserRegistrationForm(Model model) {
+    public String displayUserRegistrationForm(Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         model.addAttribute(new UserRegistrationFormDTO());
         model.addAttribute("title", "User Registration");
         return "register";
@@ -56,6 +62,9 @@ public class UserRegistrationAuthenticationController {
 
     @PostMapping("/register")//This should add the user to the userRegistrationRepository
     public String processUserRegistrationForm(@ModelAttribute @Valid UserRegistrationFormDTO userRegistrationFormDTO, Errors errors, HttpServletRequest request, Model model) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         if(errors.hasErrors()) {
             model.addAttribute("title", "User Registration");
             return "register";
@@ -81,12 +90,15 @@ public class UserRegistrationAuthenticationController {
         userRegistrationRepository.save(newGeneralUser);
         setUserInSession(request.getSession(),newGeneralUser);
 
-        return "redirect";
+        return "redirect:/login";
     }
 
     //This section written by Austin Yates
     @GetMapping("/login")
-    public String displayLoginForm(Model model) {
+    public String displayLoginForm(Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
         return "login";
@@ -96,6 +108,8 @@ public class UserRegistrationAuthenticationController {
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
                                    Model model) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
@@ -120,7 +134,7 @@ public class UserRegistrationAuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:/login";
+        return "redirect:/landing";
     }
 
     @GetMapping("/logout")

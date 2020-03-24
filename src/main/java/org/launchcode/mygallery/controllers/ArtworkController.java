@@ -48,6 +48,8 @@ public class ArtworkController {
             return "redirect:upload";
         }
 
+
+        //https://px8mbx3go1.execute-api.us-east-2.amazonaws.com/default/myPhotoUploadFunction?filename=shivanytest.jpeg
         @PostMapping("upload")
         public String handleArtworkUpload(@RequestParam("file") MultipartFile file, @RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
 

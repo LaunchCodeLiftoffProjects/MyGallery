@@ -2,6 +2,7 @@ package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.data.ArtworkRepository;
+import org.launchcode.mygallery.storage.RemoteStorageService;
 import org.launchcode.mygallery.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.util.Optional;
 
 @Controller
@@ -52,6 +54,9 @@ public class ArtworkController {
         //https://px8mbx3go1.execute-api.us-east-2.amazonaws.com/default/myPhotoUploadFunction?filename=shivanytest.jpeg
         @PostMapping("upload")
         public String handleArtworkUpload(@RequestParam("file") MultipartFile file, @RequestParam Integer artworkId, RedirectAttributes redirectAttributes) {
+
+            File convFile = storageService.convert(file);
+            String encodstring = RemoteStorageService.encodeFileToBase64Binary(convFile);
 
             storageService.store(file);
             redirectAttributes.addFlashAttribute("message",

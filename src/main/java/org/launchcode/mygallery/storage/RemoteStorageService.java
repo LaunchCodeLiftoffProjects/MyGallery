@@ -1,11 +1,18 @@
 package org.launchcode.mygallery.storage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.launchcode.mygallery.models.dto.AWSRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -13,12 +20,16 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
+@Service
+@Primary
 public class RemoteStorageService implements StorageService{
 
     private final Path rootLocation;
+
+    @Value("${aws.endpoint}")
+    private String awsUrl;
 
     @Autowired
     public RemoteStorageService(StorageProperties properties) {
@@ -38,10 +49,19 @@ public class RemoteStorageService implements StorageService{
                         "Cannot store file with relative path outside current directory "
                                 + filename);
             }
-            try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(filename),
-                        StandardCopyOption.REPLACE_EXISTING);
-            }
+
+            SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+            factory.setBufferRequestBody(false);
+
+            File convFile = this.convert(file);
+            String encodstring = this.encodeFileToBase64Binary(convFile);
+            AWSRequest awsRequest = new AWSRequest();
+            awsRequest.setImage(encodstring);
+
+            RestTemplate template = new RestTemplate(factory);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.postForEntity(awsUrl + "?filename=" +filename, awsRequest, String.class);
+
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
@@ -58,9 +78,8 @@ public class RemoteStorageService implements StorageService{
         return convFile;
     }
 
-
     //converts file to Base64 encoding
-    public static String encodeFileToBase64Binary(File file) throws Exception{
+    public static String encodeFileToBase64Binary(File file) throws IOException{
         FileInputStream fileInputStreamReader = new FileInputStream(file);
         byte[] bytes = new byte[(int)file.length()];
         fileInputStreamReader.read(bytes);

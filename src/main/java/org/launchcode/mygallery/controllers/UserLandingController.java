@@ -1,5 +1,6 @@
 package org.launchcode.mygallery.controllers;
 
+import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.UserRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,14 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserLandingController {
 
     @Autowired
     private UserRegistrationRepository userRegistrationRepository;
 
+    @Autowired
+    UserRegistrationAuthenticationController authenticationController;
+
     @GetMapping("landing")
-    public String userPage(){
+    public String userPage(Model model, HttpServletRequest request){
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
         return "landing";
     }
 

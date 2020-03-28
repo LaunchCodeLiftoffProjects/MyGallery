@@ -13,7 +13,9 @@
     </tr>
     </thead>
     <tr th:each="artwork : ${artworks}">
-        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}"></a></td>
+        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}">
+            <img th:src="@{${artwork.artLink}}"/>
+        </a></td>
     </tr>
 </table>
 

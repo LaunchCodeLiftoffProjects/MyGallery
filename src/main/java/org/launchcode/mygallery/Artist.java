@@ -2,8 +2,10 @@ package org.launchcode.mygallery;
 
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Artist extends AbstractEntity {
@@ -11,6 +13,9 @@ public class Artist extends AbstractEntity {
     private String artistName;
     private String artistInfo;
     private String socialLinks;
+
+    @OneToMany(mappedBy="artist")
+    private List<Artwork> artwork = new ArrayList<>();
 
     public Artist(String artistName, String artistInfo, String socialLinks) {
         this.artistName = artistName;
@@ -42,6 +47,14 @@ public class Artist extends AbstractEntity {
 
     public void setSocialLinks(String socialLinks) {
         this.socialLinks = socialLinks;
+    }
+
+    public List<Artwork> getArtwork() {
+        return artwork;
+    }
+
+    public void setArtwork(List<Artwork> artwork) {
+        this.artwork = artwork;
     }
 }
 

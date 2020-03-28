@@ -45,7 +45,7 @@ public class ArtistController {
             return "artist/create;";
         }
         artistRepository.save(newArtist);
-        return "redirect:";
+        return "redirect:index";
     }
 
     @GetMapping("index")

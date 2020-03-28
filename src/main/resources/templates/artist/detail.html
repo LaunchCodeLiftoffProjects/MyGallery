@@ -18,6 +18,13 @@
         <td th:text="${artist.socialLinks}"></td>
     </tr>
 </table>
+
+<div th:each="file : ${files}">
+    <div class="gallery">
+        <a target="_blank" th:href="${file}"> <img th:src="${file}" />
+        </a>
+    </div>
+</div>
 ​
 <form action='/artwork/create'>
     <input type="submit" value="Add Artwork" />

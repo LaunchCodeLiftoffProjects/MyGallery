@@ -9,7 +9,11 @@
 <table class="table table-striped">
     <tr>
         <th>Artwork</th>
-        <td th:text="${artwork.artLink}"></td>
+        <td>
+            <div class="box">
+            <img th:src="@{${artwork.artLink}}">
+            </div>
+        </td>
     </tr>
     <tr>
         <th>Title</th>

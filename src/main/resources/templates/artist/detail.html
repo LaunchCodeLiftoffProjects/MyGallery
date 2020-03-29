@@ -19,8 +19,13 @@
     </tr>
 </table>
 ​
-<form action='/artwork/create'>
-    <input type="submit" value="Add Artwork" />
+<form action='/artwork/create' >
+    <div th:if = "${artist.artistUserId == user.id}">
+        <input type="submit" value="Add Artwork" />
+    </div>
 </form>
+
+
+
 </body>
 </html>

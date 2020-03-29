@@ -31,6 +31,7 @@ public class ArtistController {
 
         model.addAttribute("title", "Create Artist");
         model.addAttribute(new Artist());
+
         return "artist/create";
     }
 
@@ -44,8 +45,11 @@ public class ArtistController {
             model.addAttribute("title","Create Artist");
             return "artist/create;";
         }
+        newArtist.setArtistUserId(generalUser.getId());
         artistRepository.save(newArtist);
-        return "redirect:";
+
+
+        return "redirect:index";
     }
 
     @GetMapping("index")
@@ -68,6 +72,7 @@ public class ArtistController {
         Artist artist = result.get();
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
+
         return "artist/detail";
     }
 }

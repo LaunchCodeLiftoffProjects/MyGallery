@@ -3,16 +3,16 @@ package org.launchcode.mygallery;
 import com.mysql.cj.jdbc.Blob;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 //Coded by Kevin Buss
 
 @Entity
 public class Artwork extends AbstractEntity {
 
-// To be added with a One to Many relationship with the Artist table later
-//    @ManyToOne
-//    private Artist artist
+    private Integer artistId;
     private String title;
     private String description;
     private String medium;
@@ -20,7 +20,8 @@ public class Artwork extends AbstractEntity {
     private String size;
     private String artLink;
 
-    public Artwork(String title, String description, String medium, String genre, String size, String artLink) {
+    public Artwork(Integer artist, String title, String description, String medium, String genre, String size, String artLink) {
+        this.artistId = artistId;
         this.title = title;
         this.description = description;
         this.medium = medium;
@@ -77,5 +78,13 @@ public class Artwork extends AbstractEntity {
 
     public void setArtLink(String artLink) {
         this.artLink = artLink;
+    }
+
+    public Integer getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Integer artistId) {
+        this.artistId = artistId;
     }
 }

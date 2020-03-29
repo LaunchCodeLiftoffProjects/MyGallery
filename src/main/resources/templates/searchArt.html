@@ -1,0 +1,44 @@
+<!--written by Jen Buck-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<div class="container body-content"></div>
+
+    <h1>Let's find some art for you!</h1>
+
+    <form th:action="@{/searchArt/results}" method = "post">
+        <h2> What do you want to search by?</h2>
+
+        <p>
+            <span th:each="column : ${columns}">
+                <input
+                        type="radio"
+                        name="searchType"
+                        th:id="${column.key}"
+                        th:value="${column.key}"
+                        th:checked="${column.key == 'all'}"/>
+                <label th:for="${column.key}" th:text="${column.value}"></label>
+            </span>
+        </p>
+
+        <p>
+            <label for="searchTerm">Keyword: </label>
+            <input type="text" name="searchTerm" id="searchTerm">
+        </p>
+
+        <input type="submit" value="Search" />
+    </form>
+
+    <hr />
+
+    <table class="artwork-listing">
+        <tr th:each="artwork : ${artworks}">
+            <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

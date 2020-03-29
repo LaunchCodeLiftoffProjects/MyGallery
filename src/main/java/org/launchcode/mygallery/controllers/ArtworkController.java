@@ -88,10 +88,11 @@ public class ArtworkController {
     public String displayArtworkDetails(@RequestParam Integer artworkId, Model model) {
 
         Optional<Artwork> result = artworkRepository.findById(artworkId);
-
+      
         Artwork artwork = result.get();
         model.addAttribute("title", artwork.getTitle() + " Details");
         model.addAttribute("artwork", artwork);
         return "artwork/detail";
+
     }
 }

@@ -1,6 +1,7 @@
 package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artwork;
+import org.launchcode.mygallery.ArtworkData;
 import org.launchcode.mygallery.data.ArtworkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
 
 //Written by Jen Buck//
 @Controller
 @RequestMapping("searchArt")
 public class SearchController {
+
+    static HashMap<String, String> columnChoices = new HashMap<>();
+    public SearchController() {
+        columnChoices.put("all", "All");
+        columnChoices.put("description", "Description");
+        columnChoices.put("medium", "Medium");
+        columnChoices.put("genre", "Genre");
+        columnChoices.put("size", "Size");
+    }
 
     @Autowired
     private ArtworkRepository artworkRepository;

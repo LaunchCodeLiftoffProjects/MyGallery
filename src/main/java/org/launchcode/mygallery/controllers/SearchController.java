@@ -15,18 +15,28 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("searchArt")
 public class SearchController {
+
     @Autowired
     private ArtworkRepository artworkRepository;
 
     @RequestMapping("")
     public String search(Model model) {
-        model.addAttribute("artworks", artworkRepository.findAll());
+        model.addAttribute("columns", columnChoices);
         return "searchArt";
     }
 
     @PostMapping("results")
-    public String displaySearchResults(Model model, @RequestParam String searchTerm){
-//put code here after making the ArtworkData class
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
+        Iterable<Artwork> artworks;
+        if(searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
+            artworks = artworkRepository.findAll();
+        }else {
+            artworks = ArtworkData.findByColumnAndValue(searchType, searchTerm, artworkRepository.findAll());
+        }
+        model.addAttribute("columns", columnChoices);
+        model.addAttribute("title", "Artwork with " + columnChoices.get(searchType) + ": " + searchTerm);
+        model.addAttribute("artworks", artworks);
+
         return "searchArt";
     }
 }

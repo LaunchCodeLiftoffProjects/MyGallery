@@ -74,5 +74,5 @@ public class ArtworkData {
         }
         return artworkResults;
     }
-    
+
 }

@@ -12,10 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Artwork extends AbstractEntity {
 
-    @ManyToOne
-    @NotNull(message = "Artist is required")
-    private Artist artist;
-
+    private Integer artistId;
     private String title;
     private String description;
     private String medium;
@@ -23,8 +20,8 @@ public class Artwork extends AbstractEntity {
     private String size;
     private String artLink;
 
-    public Artwork(Artist artist, String title, String description, String medium, String genre, String size, String artLink) {
-        this.artist=artist;
+    public Artwork(Integer artist, String title, String description, String medium, String genre, String size, String artLink) {
+        this.artistId = artistId;
         this.title = title;
         this.description = description;
         this.medium = medium;
@@ -83,11 +80,11 @@ public class Artwork extends AbstractEntity {
         this.artLink = artLink;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public Integer getArtistId() {
+        return artistId;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setArtistId(Integer artistId) {
+        this.artistId = artistId;
     }
 }

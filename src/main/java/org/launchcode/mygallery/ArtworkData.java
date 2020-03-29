@@ -38,7 +38,9 @@ public class ArtworkData {
 
     public static String getFieldValue(Artwork artwork, String attributeName) {
         String theValue;
-        if (attributeName.equals("description")){
+        if(attributeName.equals("title")){
+            theValue = artwork.getTitle();
+        }else if(attributeName.equals("description")){
             theValue = artwork.getDescription();
         } else if (attributeName.equals("medium")){
             theValue = artwork.getMedium();
@@ -61,7 +63,9 @@ public class ArtworkData {
         ArrayList<Artwork> artworkResults = new ArrayList<>();// makes a list to hold the search results
 
         for (Artwork artwork : allArtworks) {
-            if (artwork.getDescription().toLowerCase().contains(value.toLowerCase())) {
+            if(artwork.getTitle().toLowerCase().contains(value.toLowerCase())){
+                artworkResults.add(artwork);
+            }else if (artwork.getDescription().toLowerCase().contains(value.toLowerCase())) {
                 artworkResults.add(artwork);
             }else if (artwork.getMedium().toLowerCase().contains(value.toLowerCase())) {
                 artworkResults.add(artwork);

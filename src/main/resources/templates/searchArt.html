@@ -32,5 +32,13 @@
 
         <input type="submit" value="Search" />
     </form>
+
+    <hr />
+
+    <table class="artwork-listing">
+        <tr th:each="artwork : ${artworks}">
+            <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}"></a></td>
+        </tr>
+    </table>
 </body>
 </html>

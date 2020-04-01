@@ -14,13 +14,14 @@ public class Artist extends AbstractEntity {
     private Integer artistUserId;
     private String artistName;
     private String artistInfo;
-    private String socialLinks;
+    @OneToMany
+    private List<Socials> socials = new ArrayList<>();
 
 
-    public Artist(String artistName, String artistInfo, String socialLinks, Integer artistUserId) {
+    public Artist(String artistName, String artistInfo, ArrayList socials, Integer artistUserId) {
         this.artistName = artistName;
         this.artistInfo = artistInfo;
-        this.socialLinks = socialLinks;
+        this.socials = socials;
         this.artistUserId = artistUserId;
     }
 
@@ -42,20 +43,20 @@ public class Artist extends AbstractEntity {
         this.artistInfo = artistInfo;
     }
 
-    public String getSocialLinks() {
-        return socialLinks;
-    }
-
-    public void setSocialLinks(String socialLinks) {
-        this.socialLinks = socialLinks;
-    }
-
     public Integer getArtistUserId() {
         return artistUserId;
     }
 
     public void setArtistUserId(Integer artistUserId) {
         this.artistUserId = artistUserId;
+    }
+
+    public List<Socials> getSocials() {
+        return socials;
+    }
+
+    public void setSocials(List<Socials> socials) {
+        this.socials = socials;
     }
 }
 

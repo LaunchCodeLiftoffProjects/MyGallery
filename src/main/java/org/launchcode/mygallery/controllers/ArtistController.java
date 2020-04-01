@@ -4,6 +4,7 @@ import org.launchcode.mygallery.Artist;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.ArtistRepository;
+import org.launchcode.mygallery.data.ArtworkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class ArtistController {
 
     @Autowired
     private ArtistRepository artistRepository;
+
+    @Autowired
+    private ArtworkRepository artworkRepository;
 
     @Autowired
     UserRegistrationAuthenticationController authenticationController;
@@ -54,6 +58,7 @@ public class ArtistController {
 
     @GetMapping("index")
     public String displayAllArtists(Model model, HttpServletRequest request) {
+
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
 
@@ -63,7 +68,8 @@ public class ArtistController {
     }
 
     @GetMapping("detail")
-    public String displayArtistDetails(@RequestParam Integer artistId, Model model, HttpServletRequest request) {
+    public String displayArtistDetails(@RequestParam Integer artistId, Model model, HttpServletRequest request, Artwork artwork) {
+
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
 
@@ -72,7 +78,7 @@ public class ArtistController {
         Artist artist = result.get();
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
-
+        model.addAttribute("artworks", artworkRepository.findById(artistId));
         return "artist/detail";
     }
 }

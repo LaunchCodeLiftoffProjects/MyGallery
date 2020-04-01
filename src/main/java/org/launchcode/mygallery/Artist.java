@@ -11,11 +11,14 @@ import java.util.Set;
 @Entity
 public class Artist extends AbstractEntity {
 
+
     private Integer artistUserId;
     private String artistName;
     private String artistInfo;
     private String socialLinks;
 
+    @OneToMany(mappedBy = "artist")
+    private final List<Artwork> artwork = new ArrayList<>();
 
     public Artist(String artistName, String artistInfo, String socialLinks, Integer artistUserId) {
         this.artistName = artistName;

@@ -35,10 +35,6 @@ public class Artist extends AbstractEntity {
 
     public Artist(){}
 
-//    public static Artist findArtistByUserId(Integer id) {
-//        Iterable<Artist> artists = ArtistRepository.findAll();
-//    }
-
     public String getArtistName() {
         return artistName;
     }

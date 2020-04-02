@@ -20,7 +20,8 @@
 </table>
 ​
 <form action='/artwork/create' >
-    <div th:if = "${artist.artistUserId == user.id}">
+<!--    <div th:if = "${artist.artistUserId == user.id}">-->
+    <div th:if = "${artist.connectedUser == user}">
         <input type="submit" value="Add Artwork" />
     </div>
 </form>

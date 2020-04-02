@@ -80,7 +80,8 @@ public class ArtistController {
         Artist artist = result.get();
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
-        model.addAttribute("artworks", artworkRepository.findById(artistId));
+        model.addAttribute("artworks", artist.getArtwork());
         return "artist/detail";
+
     }
 }

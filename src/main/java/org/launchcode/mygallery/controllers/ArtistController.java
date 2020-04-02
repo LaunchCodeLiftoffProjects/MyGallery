@@ -49,6 +49,8 @@ public class ArtistController {
             model.addAttribute("title","Create Artist");
             return "artist/create;";
         }
+
+        newArtist.setConnectedUser(generalUser);
         newArtist.setArtistUserId(generalUser.getId());
         artistRepository.save(newArtist);
 

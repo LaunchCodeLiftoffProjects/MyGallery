@@ -1,6 +1,7 @@
 package org.launchcode.mygallery;
 
 import com.mysql.cj.jdbc.Blob;
+import org.launchcode.mygallery.data.ArtistRepository;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

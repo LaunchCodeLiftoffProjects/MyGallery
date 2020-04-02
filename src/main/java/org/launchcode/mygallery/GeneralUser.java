@@ -3,7 +3,10 @@ package org.launchcode.mygallery;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //Written by Kevin Buss
@@ -12,6 +15,9 @@ import javax.validation.constraints.NotNull;
 public class GeneralUser extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    @OneToMany(mappedBy = "connectedUser")
+    private final List<Artist> artists = new ArrayList<>();
 
     @NotNull
     private String username;
@@ -42,4 +48,7 @@ public class GeneralUser extends AbstractEntity {
         return encoder.matches(password, pwHash);
     }
 
+    public List<Artist> getArtists() {
+        return artists;
+    }
 }

@@ -1,7 +1,10 @@
 package org.launchcode.mygallery;
 
 
+import org.launchcode.mygallery.data.ArtistRepository;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
@@ -20,6 +23,9 @@ public class Artist extends AbstractEntity {
     @OneToMany(mappedBy = "artist")
     private final List<Artwork> artwork = new ArrayList<>();
 
+    @ManyToOne
+    private GeneralUser connectedUser;
+
     public Artist(String artistName, String artistInfo, String socialLinks, Integer artistUserId) {
         this.artistName = artistName;
         this.artistInfo = artistInfo;
@@ -28,6 +34,10 @@ public class Artist extends AbstractEntity {
     }
 
     public Artist(){}
+
+//    public static Artist findArtistByUserId(Integer id) {
+//        Iterable<Artist> artists = ArtistRepository.findAll();
+//    }
 
     public String getArtistName() {
         return artistName;
@@ -59,6 +69,19 @@ public class Artist extends AbstractEntity {
 
     public void setArtistUserId(Integer artistUserId) {
         this.artistUserId = artistUserId;
+    }
+
+
+    public List<Artwork> getArtwork() {
+        return artwork;
+    }
+
+    public GeneralUser getConnectedUser() {
+        return connectedUser;
+    }
+
+    public void setConnectedUser(GeneralUser connectedUser) {
+        this.connectedUser = connectedUser;
     }
 }
 

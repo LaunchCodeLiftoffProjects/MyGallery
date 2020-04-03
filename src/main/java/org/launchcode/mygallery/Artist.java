@@ -14,8 +14,6 @@ import java.util.Set;
 @Entity
 public class Artist extends AbstractEntity {
 
-
-    private Integer artistUserId;
     private String artistName;
     private String artistInfo;
     private String socialLinks;
@@ -26,11 +24,10 @@ public class Artist extends AbstractEntity {
     @ManyToOne
     private GeneralUser connectedUser;
 
-    public Artist(String artistName, String artistInfo, String socialLinks, Integer artistUserId) {
+    public Artist(String artistName, String artistInfo, String socialLinks) {
         this.artistName = artistName;
         this.artistInfo = artistInfo;
         this.socialLinks = socialLinks;
-        this.artistUserId = artistUserId;
     }
 
     public Artist(){}
@@ -58,15 +55,6 @@ public class Artist extends AbstractEntity {
     public void setSocialLinks(String socialLinks) {
         this.socialLinks = socialLinks;
     }
-
-    public Integer getArtistUserId() {
-        return artistUserId;
-    }
-
-    public void setArtistUserId(Integer artistUserId) {
-        this.artistUserId = artistUserId;
-    }
-
 
     public List<Artwork> getArtwork() {
         return artwork;

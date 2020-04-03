@@ -27,7 +27,7 @@ public class UserRegistrationAuthenticationController {
     private UserRegistrationRepository userRegistrationRepository;
 
     @Autowired
-    UserRegistrationAuthenticationController authenticationController;
+    private UserRegistrationAuthenticationController authenticationController;
 
     private static final String userSessionKey = "user"; //If this doesn't work, try "generalUser"
 
@@ -90,7 +90,13 @@ public class UserRegistrationAuthenticationController {
         userRegistrationRepository.save(newGeneralUser);
         setUserInSession(request.getSession(),newGeneralUser);
 
-        return "redirect:/login";
+        if (newGeneralUser.getRole().equals("explorer")) {
+            return "redirect:/landing";
+        } else if (newGeneralUser.getRole().equals("artist")) {
+            return "redirect:/artist/create";
+        } else {
+            return "register";
+        }
     }
 
     //This section written by Austin Yates

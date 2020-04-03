@@ -26,7 +26,7 @@ public class ArtistController {
     private ArtworkRepository artworkRepository;
 
     @Autowired
-    UserRegistrationAuthenticationController authenticationController;
+    private UserRegistrationAuthenticationController authenticationController;
 
     @GetMapping("create")
     public String displayCreateArtistForm (Model model, HttpServletRequest request){
@@ -35,6 +35,13 @@ public class ArtistController {
 
         model.addAttribute("title", "Create Artist");
         model.addAttribute(new Artist());
+
+        if (generalUser.getRole().equals("explorer")) {
+            return "redirect:index";
+        }
+        if (generalUser.getArtists().size() > 0) {
+            return "redirect:index";
+        }
 
         return "artist/create";
     }
@@ -51,7 +58,6 @@ public class ArtistController {
         }
 
         newArtist.setConnectedUser(generalUser);
-        newArtist.setArtistUserId(generalUser.getId());
         artistRepository.save(newArtist);
 
 

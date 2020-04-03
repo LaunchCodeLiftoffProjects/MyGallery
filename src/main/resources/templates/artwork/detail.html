@@ -20,6 +20,10 @@
         <td th:text="${artwork.title}"></td>
     </tr>
     <tr>
+        <th>Artist</th>
+        <td><a th:href="'/artist/detail?artistId=' + ${artwork.artist.id}" th:text="${artwork.artist.artistName}"></a></td>
+    </tr>
+    <tr>
         <th>Description</th>
         <td th:text="${artwork.description}"></td>
     </tr>

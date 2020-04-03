@@ -40,7 +40,7 @@ public class ArtistData {
         String theValue;
         if (attributeName.equals("name")){
             theValue = artist.getArtistName();
-        }else(attributeName.equals("social links")){
+        }else{
             theValue = artist.getSocialLinks();
         }
         return theValue;

@@ -16,10 +16,10 @@ import java.util.HashMap;
 //Written by Jen Buck//
 @Controller
 @RequestMapping("searchArt")
-public class SearchController {
+public class ArtworkSearchController {
 
     static HashMap<String, String> columnChoices = new HashMap<>();
-    public SearchController() {
+    public ArtworkSearchController() {
         columnChoices.put("all", "All");
         columnChoices.put("description", "Description");
         columnChoices.put("medium", "Medium");

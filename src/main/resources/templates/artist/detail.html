@@ -20,10 +20,23 @@
 </table>
 ​
 <form action='/artwork/create' >
-    <div th:if = "${artist.artistUserId == user.id}">
+<!--    <div th:if = "${artist.artistUserId == user.id}">-->
+    <div th:if = "${artist.connectedUser == user}">
         <input type="submit" value="Add Artwork" />
     </div>
 </form>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Artwork</th>
+    </tr>
+    </thead>
+    <tr th:each="artwork : ${artworks}">
+        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}">
+        </a></td>
+    </tr>
+</table>
 
 
 

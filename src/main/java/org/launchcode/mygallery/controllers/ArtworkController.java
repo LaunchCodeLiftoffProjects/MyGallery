@@ -1,7 +1,9 @@
 package org.launchcode.mygallery.controllers;
 
+import org.launchcode.mygallery.Artist;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
+import org.launchcode.mygallery.data.ArtistRepository;
 import org.launchcode.mygallery.data.ArtworkRepository;
 import org.launchcode.mygallery.storage.RemoteStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -57,6 +60,9 @@ public class ArtworkController {
             return "artwork/create";
         }
 
+        //need to put artist object in that matches the generalUser.id
+        List<Artist> artistList = generalUser.getArtists();
+        newArtwork.setArtist(artistList.get(0));
         artworkRepository.save(newArtwork);
         redirectAttributes.addAttribute("artworkId",(newArtwork.getId()));
         return "redirect:upload";

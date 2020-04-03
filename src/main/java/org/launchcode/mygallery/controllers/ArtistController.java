@@ -4,6 +4,7 @@ import org.launchcode.mygallery.Artist;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.ArtistRepository;
+import org.launchcode.mygallery.data.ArtworkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,10 @@ public class ArtistController {
     private ArtistRepository artistRepository;
 
     @Autowired
-    UserRegistrationAuthenticationController authenticationController;
+    private ArtworkRepository artworkRepository;
+
+    @Autowired
+    private UserRegistrationAuthenticationController authenticationController;
 
     @GetMapping("create")
     public String displayCreateArtistForm (Model model, HttpServletRequest request){
@@ -31,6 +35,13 @@ public class ArtistController {
 
         model.addAttribute("title", "Create Artist");
         model.addAttribute(new Artist());
+
+        if (generalUser.getRole().equals("explorer")) {
+            return "redirect:index";
+        }
+        if (generalUser.getArtists().size() > 0) {
+            return "redirect:index";
+        }
 
         return "artist/create";
     }
@@ -45,7 +56,8 @@ public class ArtistController {
             model.addAttribute("title","Create Artist");
             return "artist/create;";
         }
-        newArtist.setArtistUserId(generalUser.getId());
+
+        newArtist.setConnectedUser(generalUser);
         artistRepository.save(newArtist);
 
 
@@ -54,6 +66,7 @@ public class ArtistController {
 
     @GetMapping("index")
     public String displayAllArtists(Model model, HttpServletRequest request) {
+
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
 
@@ -63,7 +76,8 @@ public class ArtistController {
     }
 
     @GetMapping("detail")
-    public String displayArtistDetails(@RequestParam Integer artistId, Model model, HttpServletRequest request) {
+    public String displayArtistDetails(@RequestParam Integer artistId, Model model, HttpServletRequest request, Artwork artwork) {
+
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
 
@@ -72,7 +86,8 @@ public class ArtistController {
         Artist artist = result.get();
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
-
+        model.addAttribute("artworks", artist.getArtwork());
         return "artist/detail";
+
     }
 }

@@ -33,8 +33,11 @@
     </tr>
     </thead>
     <tr th:each="artwork : ${artworks}">
-        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}">
-        </a></td>
+        <td>
+            <div class="box">
+                <img th:src="@{${artwork.artLink}}">
+            </div>
+        </td>
     </tr>
 </table>
 

@@ -35,7 +35,9 @@
     <tr th:each="artwork : ${artworks}">
         <td>
             <div class="box">
-                <img th:src="@{${artwork.artLink}}">
+                <a th:href="'/artwork/detail?artworkId=' + ${artwork.id}">
+                    <img th:src="@{${artwork.artLink}}">
+                </a>
             </div>
         </td>
     </tr>

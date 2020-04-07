@@ -26,17 +26,22 @@
     </div>
 </form>
 
-<table class="table table-striped">
+<div class="gallery">
     <thead>
     <tr>
         <th>Artwork</th>
     </tr>
     </thead>
     <tr th:each="artwork : ${artworks}">
-        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}">
-        </a></td>
+        <td>
+            <div class="box">
+                <a th:href="'/artwork/detail?artworkId=' + ${artwork.id}">
+                    <img th:src="@{${artwork.artLink}}">
+                </a>
+            </div>
+        </td>
     </tr>
-</table>
+</div>
 
 
 

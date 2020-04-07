@@ -6,16 +6,18 @@
 
 <header th:replace="fragments :: header"></header>
 
-<table class="table table-striped">
+<table class="gallery">
     <thead>
     <tr>
-        <th>Artwork</th>
         <a th:href="'/searchArt'">Search for Art</a><!--This line added by Jen Buck-->
     </tr>
     </thead>
     <tr th:each="artwork : ${artworks}">
-        <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}">
-        </a></td>
+        <div class="box">
+            <a th:href="'/artwork/detail?artworkId=' + ${artwork.id}">
+                <img th:src="@{${artwork.artLink}}">
+            </a>
+        </div>
     </tr>
 </table>
 

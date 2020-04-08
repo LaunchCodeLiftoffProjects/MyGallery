@@ -4,26 +4,31 @@
 <body class="container">
 <header th:replace="fragments :: header"></header>
 
+<!--This page written by Jen Buck -->
+
 <p>Edit Artist</p>
-<form method="post">
+<form method="post" th:action="@{/artist/edit}">
+    <div class="form-group">
+        <input type="hidden" th:value="${artist.id}" name="artistId" />
+    </div>
     <div class="form-group">
         <label>Artist Name
-            <input th:field="${artist.artistName}" class="form-control">
+            <input type="text" name="artistName" th:value="${artist.artistName}" class="form-control">
         </label>
     </div>
     <div class="form-group">
         <label>Biography
-            <input th:field="${artist.artistInfo}" class="form-control">
+            <input  type="text" name="artistInfo" th:value="${artist.artistInfo}" class="form-control">
         </label>
     </div>
 
-    <div class="form-group">
-        <label>SocialLinks
-            <input th:field="${artist.socialLinks}" class="form-control">
-        </label>
-        <p class="error" th:errors="${artist.socialLinks}"></p>
-    </div>
-        <div class="form-group">
+<!--    <div class="form-group">--> <!-- Complete this section after Cameron has finished social links-->
+<!--        <label>SocialLinks-->
+<!--            <input th:field="${artist.socialLinks}" class="form-control">-->
+<!--        </label>-->
+<!--        <p class="error" th:errors="${artist.socialLinks}"></p>-->
+<!--    </div>-->
+<!--        <div class="form-group">-->
         <input type="submit" value="Edit" class="btn btn-success">
     </div>
 

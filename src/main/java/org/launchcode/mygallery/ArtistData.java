@@ -4,6 +4,8 @@ package org.launchcode.mygallery;
 //code for searching the Artist data by search term.
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArtistData {
     /**
@@ -67,4 +69,10 @@ public class ArtistData {
         return artistResults;
     }
 
+    private static final Map<Integer, Artist> artists = new HashMap<>();// a place to put artist
+
+    //get a single artist
+    public static Artist getById(Integer artistId) {
+        return artists.get(artistId);
+    }
 }

@@ -4,6 +4,11 @@
 <body class="container">
 <header th:replace="fragments :: header"></header>
 
+<form action='/artist/edit' >
+    <!--    <div th:if = "${artist.artistUserId == user.id}">-->
+    <div th:if = "${artist.connectedUser == user}">
+        <input type="submit" value="Edit Artist Info" />
+    </div>
 <table class="table table-striped">
     <tr>
         <th>Name</th>
@@ -24,6 +29,9 @@
     <div th:if = "${artist.connectedUser == user}">
         <input type="submit" value="Add Artwork" />
     </div>
+</form>
+
+
 </form>
 
 <div class="gallery">

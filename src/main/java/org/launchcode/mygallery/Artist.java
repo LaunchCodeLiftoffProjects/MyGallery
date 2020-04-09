@@ -21,6 +21,9 @@ public class Artist extends AbstractEntity {
     @OneToMany(mappedBy = "artist")
     private final List<Artwork> artwork = new ArrayList<>();
 
+    @OneToMany(mappedBy = "artist")
+    private final List<Socials> socials = new ArrayList<>();
+
     @ManyToOne
     private GeneralUser connectedUser;
 
@@ -66,6 +69,10 @@ public class Artist extends AbstractEntity {
 
     public void setConnectedUser(GeneralUser connectedUser) {
         this.connectedUser = connectedUser;
+    }
+
+    public List<Socials> getSocials() {
+        return socials;
     }
 }
 

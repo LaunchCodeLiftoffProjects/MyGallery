@@ -13,10 +13,6 @@
         <th>Biography</th>
         <td th:text="${artist.artistInfo}"></td>
     </tr>
-    <tr>
-        <th>Social Links</th>
-        <td><a th:href="${artist.socialLinks}" th:text="${artist.socialLinks}"></a></td>
-    </tr>
 </table>
 ​
 <form action='/artwork/create' >
@@ -41,9 +37,23 @@
             </div>
         </td>
     </tr>
+
 </div>
 
+<form action='/socials/create' >
+    <div th:if = "${artist.connectedUser == user}">
+        <input type="submit" value="Add Social Media" />
+    </div>
+</form>
 
+<div class="table table-striped">
+    <tr>
+        <th>Social Media</th>
+    </tr>
+    <tr th:each="social : ${socials}">
+        <td><a th:href="${artist.socials}" th:text="${artist.socials}"></a></td>
+    </tr>
+</div>
 
 </body>
 </html>

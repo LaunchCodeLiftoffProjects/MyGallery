@@ -4,12 +4,12 @@
 <body class="container">
 <header th:replace="fragments :: header"></header>
 
-<form action='/artist/edit' >
-    <!--    <div th:if = "${artist.artistUserId == user.id}">-->
-    <div th:if = "${artist.connectedUser == user}">
-        <input type="submit" value="Edit Artist Info" />
-    </div>
+
 <table class="table table-striped">
+    <div th:if = "${artist.connectedUser == user}"><!--This section added by Jen Buck-->
+        <a th:href="'/artist/edit?artistId=' + ${artist.id}">Edit My Info</a>
+    </div>
+
     <tr>
         <th>Name</th>
         <td th:text="${artist.artistName}"></td>

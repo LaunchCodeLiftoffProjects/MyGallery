@@ -1,7 +1,6 @@
 package org.launchcode.mygallery.controllers;
 
 import org.launchcode.mygallery.Artist;
-import org.launchcode.mygallery.ArtistData;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
 import org.launchcode.mygallery.data.ArtistRepository;
@@ -93,8 +92,8 @@ public class ArtistController {
     }
 
     //This section written by Jen Buck
-    @GetMapping("edit/{artistId}")
-    public String displayEditArtistForm(@PathVariable Integer artistId, Model model, HttpServletRequest request) {
+    @GetMapping("edit")
+    public String displayEditArtistForm(@RequestParam Integer artistId, Model model,  HttpServletRequest request) {
 
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
@@ -104,15 +103,25 @@ public class ArtistController {
         Artist artist = result.get();
 
         model.addAttribute("title", "Edit Artist: " + artist.getArtistName());
-        model.addAttribute("artists", result);
+        model.addAttribute("artists", artist);
         return "artist/edit";
     }
 
     @PostMapping("edit") //ADD OPTION TO EDIT SOCIAL LINKS AFTER CAM GETS HIS PART FIGURED OUT
-    public String processEditArtistForm(@RequestParam Integer artistId, String artistName, String artistInfo) {
-        ArtistData.getById(artistId).setArtistName(artistName);
-        ArtistData.getById(artistId).setArtistInfo(artistInfo);
-        return "redirect:";
+    public String processEditArtistForm(@RequestParam Integer artistId, Model model, String artistName, String artistInfo, HttpServletRequest request) {
+
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
+        Optional<Artist> result = artistRepository.findById(artistId);
+
+        Artist artist = result.get();
+
+
+        artist.setArtistName(artistName);
+        artist.setArtistInfo(artistInfo);
+
+        return "redirect:index";
     }
 
 }

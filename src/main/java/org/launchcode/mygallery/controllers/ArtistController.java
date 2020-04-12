@@ -117,7 +117,6 @@ public class ArtistController {
 
         Artist artist = result.get();
 
-
         artist.setArtistName(artistName);
         artist.setArtistInfo(artistInfo);
 

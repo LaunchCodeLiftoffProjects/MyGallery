@@ -120,7 +120,12 @@ public class ArtistController {
         artist.setArtistName(artistName);
         artist.setArtistInfo(artistInfo);
 
-        return "redirect:index";
+        artistRepository.save(artist);
+
+        model.addAttribute("title", artist.getArtistName());
+        model.addAttribute("artist", artist);
+        model.addAttribute("artworks", artist.getArtwork());
+        return "artist/detail";
     }
 
 }

@@ -90,4 +90,37 @@ public class ArtistController {
         return "artist/detail";
 
     }
+
+    //This section written by Jen Buck
+    @GetMapping("edit")
+    public String displayEditArtistForm(@RequestParam Integer artistId, Model model,  HttpServletRequest request) {
+
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
+        Optional<Artist> result = artistRepository.findById(artistId);
+
+        Artist artist = result.get();
+
+        model.addAttribute("title", "Edit Artist: " + artist.getArtistName());
+        model.addAttribute("artists", artist);
+        return "artist/edit";
+    }
+
+    @PostMapping("edit") //ADD OPTION TO EDIT SOCIAL LINKS AFTER CAM GETS HIS PART FIGURED OUT
+    public String processEditArtistForm(@RequestParam Integer artistId, Model model, String artistName, String artistInfo, HttpServletRequest request) {
+
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
+        Optional<Artist> result = artistRepository.findById(artistId);
+
+        Artist artist = result.get();
+
+        artist.setArtistName(artistName);
+        artist.setArtistInfo(artistInfo);
+
+        return "redirect:index";
+    }
+
 }

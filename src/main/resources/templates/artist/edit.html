@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+
+<!--This page written by Jen Buck -->
+
+<p>Edit My Artist Page</p>
+<form method="post" th:action="@{/artist/edit}">
+    <th:block th:each="artist : ${artists}">
+    <div class="form-group">
+        <input type="hidden" th:value="${artist.id}" name="artistId" />
+    </div>
+    <div class="form-group">
+        <label>Artist Name
+            <input type="text" name="artistName" class="form-control" th:value="${artist.artistName}">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Biography
+            <input  type="text" name="artistInfo" class="form-control" th:value="${artist.artistInfo}">
+        </label>
+    </div>
+
+<!--    <div class="form-group">  &lt;!&ndash;Complete this section after Cameron has finished social links&ndash;&gt;-->
+<!--        <label>SocialLinks-->
+<!--            <input th:field="${artist.socialLinks}" class="form-control">-->
+<!--        </label>-->
+<!--        <p class="error" th:errors="${artist.socialLinks}"></p>-->
+<!--    </div>-->
+        <div class="form-group">
+            <input type="submit" value="Edit" class="btn btn-success">
+        </div>
+    </th:block>
+</form>
+
+</body>
+</html>

@@ -13,7 +13,9 @@
     <a th:href="'/searchArtist'">Search for Artist</a><!--This line added by Jen Buck-->
 
     <tr th:each="artist : ${artists}">
-        <td><a th:href="'/artist/detail?artistId=' + ${artist.id}" th:text="${artist.artistName}"></a></td>
+        <td><a th:href="'/artist/detail?artistId=' + ${artist.id}" th:text="${artist.artistName}"></a></td> <!--I think this is the line that is making my artistId a string. JB-->
+
+
 
     </tr>
 </table>

@@ -41,5 +41,12 @@
     </tr>
 </table>
 
+<form method="POST" action="/artwork/delete">
+    <div th:if = "${artwork.artist.connectedUser == user}">
+        <input type="hidden" id="artworkId" name="artworkId" th:value="${artwork.id}" >
+        <input type="submit" value="Delete Artwork" />
+    </div>
+</form>
+
 </body>
 </html>

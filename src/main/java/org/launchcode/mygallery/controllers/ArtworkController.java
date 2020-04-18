@@ -119,4 +119,14 @@ public class ArtworkController {
         return "artwork/detail";
 
     }
+
+    @PostMapping("delete")
+    public String deleteArtwork(@RequestParam Integer artworkId, Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+
+        artworkRepository.deleteById(artworkId);
+
+        return "redirect:/artwork/index";
+    }
 }

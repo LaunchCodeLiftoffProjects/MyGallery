@@ -87,6 +87,7 @@ public class ArtistController {
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
         model.addAttribute("artworks", artist.getArtwork());
+        model.addAttribute("socials" , artist.getSocials());
         return "artist/detail";
 
     }

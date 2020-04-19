@@ -7,9 +7,10 @@
 <header th:replace="fragments :: header"></header>
 
 <table class="table table-striped">
-    <div th:if = "${artist.connectedUser == user}"><!--This section added by Jen Buck-->
-        <a th:href="'/artist/edit?artistId=' + ${artist.id}">Edit My Info</a>
+    <div th:if = "${artwork.artist.connectedUser == user}"><!--This section added by Jen Buck-->
+        <a input type="submit" th:href="'/artwork/edit?artworkId=' + ${artwork.id}">Edit Artwork</a>
     </div>
+
     <tr>
         <th>Artwork</th>
         <td>

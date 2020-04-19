@@ -3,7 +3,6 @@ package org.launchcode.mygallery.controllers;
 import org.launchcode.mygallery.Artist;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
-import org.launchcode.mygallery.data.ArtistRepository;
 import org.launchcode.mygallery.data.ArtworkRepository;
 import org.launchcode.mygallery.storage.RemoteStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,5 +127,19 @@ public class ArtworkController {
         artworkRepository.deleteById(artworkId);
 
         return "redirect:/artwork/index";
+    }
+
+    //This section written by Jen Buck
+    @GetMapping("edit")
+    public String displayEditArtworkForm(@RequestParam Integer artworkId, Model model, HttpServletRequest request) {
+        GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
+        model.addAttribute("user", generalUser);
+        Optional<Artwork> result = artworkRepository.findById(artworkId);
+
+        Artwork artwork = result.get();
+        model.addAttribute("title", artwork.getTitle() + " Details");
+        model.addAttribute("artwork", artwork);
+        return "artwork/edit";
+
     }
 }

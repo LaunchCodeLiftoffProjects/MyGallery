@@ -59,7 +59,6 @@ public class SocialsController {
 
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
-        model.addAttribute("title", "Socials");
         model.addAttribute("socials", socialsRepository.findAll());
         return "socials/index";
     }

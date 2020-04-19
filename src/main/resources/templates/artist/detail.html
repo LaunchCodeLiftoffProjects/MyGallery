@@ -51,7 +51,7 @@
         <th>Social Media</th>
     </tr>
     <ul>
-        <li th:each="artist : ${artists}">
+        <li th:each="social : ${socials}">
             <a th:href="${social.name}" th:text="${social.name}"></a>
         </li>
     </ul>

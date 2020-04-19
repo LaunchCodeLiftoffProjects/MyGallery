@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserLandingController {
@@ -29,8 +31,11 @@ public class UserLandingController {
     public String userPage(Model model, HttpServletRequest request){
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
-        model.addAttribute(new Artwork());
+        model.addAttribute("artworks", artworkRepository.findAll());
 
+        Iterable<Artwork> artworks = artworkRepository.findAll();
+        Artwork firstArtwork = artworks.iterator().next();
+        model.addAttribute("firstArtwork",firstArtwork);
         return "landing";
     }
 

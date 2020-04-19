@@ -49,8 +49,8 @@ public class SocialsController {
         List<Artist> artistList = generalUser.getArtists();
         newSocial.setArtist(artistList.get(0));
         socialsRepository.save(newSocial);
-        redirectAttributes.addAttribute("artistId",(newSocial.getId()));
-        return "redirect:upload";
+        redirectAttributes.addAttribute("artistId",(newSocial.getArtist()));
+        return "redirect:/artist/detail";
     }
 
 

@@ -46,13 +46,15 @@
     </div>
 </form>
 
-<div class="table table-striped">
+<div>
     <tr>
         <th>Social Media</th>
     </tr>
-    <tr th:each="social : ${socials}">
-        <td><a th:href="${artist.socials}" th:text="${artist.socials}"></a></td>
-    </tr>
+    <ul>
+        <li th:each="artist : ${artists}">
+            <a th:href="${social.name}" th:text="${social.name}"></a>
+        </li>
+    </ul>
 </div>
 
 </body>

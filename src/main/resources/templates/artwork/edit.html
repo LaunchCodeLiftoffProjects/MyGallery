@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+
+<!--This page written by Jen Buck -->
+
+<p>Edit My Artwork Page</p>
+<form method="post" th:action="@{/artwork/edit}">
+    <th:block th:each="artwork : ${artworks}">
+        <div class="form-group">
+            <input type="hidden" th:value="${artwork.id}" name="artworkId" />
+        </div>
+        <div class="form-group">
+            <label>Title
+                <input type="text" name="title" class="form-control" th:value="${artwork.title}">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Description
+                <input  type="text" name="description" class="form-control" th:value="${artwork.description}">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Medium
+                <input  type="text" name="medium" class="form-control" th:value="${artwork.medium}">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Genre
+                <input  type="text" name="genre" class="form-control" th:value="${artwork.genre}">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Size
+                <input  type="text" name="size" class="form-control" th:value="${artwork.size}">
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Edit" class="btn btn-success">
+        </div>
+    </th:block>
+</form>
+
+</body>
+</html>

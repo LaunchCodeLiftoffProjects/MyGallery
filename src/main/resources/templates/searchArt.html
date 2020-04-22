@@ -37,7 +37,11 @@
 
     <table class="artwork-listing">
         <tr th:each="artwork : ${artworks}">
-            <td><a th:href="'/artwork/detail?artworkId=' + ${artwork.id}" th:text="${artwork.title}"></a></td>
+            <div class="box">
+                <a th:href="'/artwork/detail?artworkId=' + ${artwork.id}">
+                    <img th:src="@{${artwork.artLink}}">
+                </a>
+            </div>
         </tr>
     </table>
 </body>

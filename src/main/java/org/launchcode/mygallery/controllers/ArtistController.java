@@ -3,6 +3,7 @@ package org.launchcode.mygallery.controllers;
 import org.launchcode.mygallery.Artist;
 import org.launchcode.mygallery.Artwork;
 import org.launchcode.mygallery.GeneralUser;
+import org.launchcode.mygallery.Socials;
 import org.launchcode.mygallery.data.ArtistRepository;
 import org.launchcode.mygallery.data.ArtworkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.launchcode.mygallery.data.SocialsRepository;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -109,23 +112,27 @@ public class ArtistController {
     }
 
     @PostMapping("edit") //ADD OPTION TO EDIT SOCIAL LINKS AFTER CAM GETS HIS PART FIGURED OUT
-    public String processEditArtistForm(@RequestParam Integer artistId, Model model, String artistName, String artistInfo, HttpServletRequest request) {
+    public String processEditArtistForm(@RequestParam Integer artistId, Model model, String artistName, String artistInfo,String socialLinks, HttpServletRequest request) {
 
         GeneralUser generalUser = authenticationController.getUserFromSession(request.getSession());
         model.addAttribute("user", generalUser);
 
         Optional<Artist> result = artistRepository.findById(artistId);
-
         Artist artist = result.get();
+
+        Optional<Socials> socialsResult = socialsRepository.findById(artistId);
+        Socials socials = socialsResult.get();
 
         artist.setArtistName(artistName);
         artist.setArtistInfo(artistInfo);
+        artist.setSocialLinks(socialLinks);
 
         artistRepository.save(artist);
 
         model.addAttribute("title", artist.getArtistName());
         model.addAttribute("artist", artist);
         model.addAttribute("artworks", artist.getArtwork());
+        model.addAttribute("socials", socials);
         return "artist/detail";
     }
 

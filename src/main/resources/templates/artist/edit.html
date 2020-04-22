@@ -6,7 +6,7 @@
 
 <!--This page written by Jen Buck -->
 
-<p>Edit My Artist Page</p>
+<p>Edit My Info</p>
 <form method="post" th:action="@{/artist/edit}">
     <th:block th:each="artist : ${artists}">
     <div class="form-group">
@@ -22,13 +22,11 @@
             <input  type="text" name="artistInfo" class="form-control" th:value="${artist.artistInfo}">
         </label>
     </div>
-
-<!--    <div class="form-group">  &lt;!&ndash;Complete this section after Cameron has finished social links&ndash;&gt;-->
-<!--        <label>SocialLinks-->
-<!--            <input th:field="${artist.socialLinks}" class="form-control">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${artist.socialLinks}"></p>-->
-<!--    </div>-->
+    <div class="form-group">
+        <label>SocialLinks
+            <input th:each="social : ${socials}" type="text" name="socialLinks" class="form-control" th:value="${social.name}" >
+        </label>
+    </div>
         <div class="form-group">
             <input type="submit" value="Edit" class="btn btn-success">
         </div>

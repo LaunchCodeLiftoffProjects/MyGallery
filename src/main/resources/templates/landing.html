@@ -21,7 +21,6 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="d-block w-100" th:src="@{${firstArtwork.artLink}}" alt="Start Slideshow">
-                <h2 th:if="${firstArtwork.artLink.equals(null)}">No Art Added Yet!</h2>
             </div>
 
             <div class="carousel-item" th:each="artwork : ${artworks}">
